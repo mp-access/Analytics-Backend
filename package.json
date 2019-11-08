@@ -1,0 +1,21 @@
+{
+  "name": "analytics-express",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.6.0",
+    "mongodb": "^3.3.3",
+    "mongoose": "^5.7.8"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.0.1",
+    "nodemon": "^1.19.4"
+  },
+  "scripts": {
+    "start": "env-cmd -f ./.env nodemon src/app.js",
+    "production": "env-cmd -f ./.env.production nodemon src/app.js"
+  }
+}
