@@ -34,6 +34,7 @@ initSubmissionsRoutes = (db, router) => {
                 totalSubmissions
             });
         } catch (error) {
+            console.error(error);
             res.status(500).send();
         }
     });
