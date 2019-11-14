@@ -30,6 +30,11 @@ const countUsersActiveInTheLastHour = async (db) => {
         .distinct('userId', {'timestamp': {'$gt': new Date(new Date() - 3600 * 1000)}});
 };
 
+const countHowManyUsersSubmittedByExercise = async (exerciseId, db) => {
+    return db.collection('studentSubmissions')
+        .distinct('userId', {exerciseId})
+};
+
 const getGradeDistributionByExercise = async (exerciseId, db) => {
     const pipeline = [
         {
@@ -76,4 +81,4 @@ const getGradeDistributionByExercise = async (exerciseId, db) => {
     return db.collection('studentSubmissions').aggregate(pipeline).toArray();
 };
 
-module.exports = {findAllSubmissions, countTotalSubmissionsByExerciseId, countGradedSubmissionsByExerciseId, countUsersActiveInTheLastHour, getGradeDistributionByExercise};
+module.exports = {findAllSubmissions,countHowManyUsersSubmittedByExercise,  countTotalSubmissionsByExerciseId, countGradedSubmissionsByExerciseId, countUsersActiveInTheLastHour, getGradeDistributionByExercise};
