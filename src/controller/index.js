@@ -14,6 +14,10 @@ const initRouter = (db, isDev) => {
 
     initSubmissionsRoutes(db, router);
 
+    router.get('*', function(req, res) {
+        res.status(404).send({path: req.path})
+    });
+
     return router;
 };
 
