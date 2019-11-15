@@ -16,6 +16,6 @@
   },
   "scripts": {
     "start": "env-cmd -f ./.env nodemon src/app.js",
-    "production": "env-cmd -f ./.env.production nodemon src/app.js"
+    "production": "env-cmd -f ./.env.production node src/app.js"
   }
 }

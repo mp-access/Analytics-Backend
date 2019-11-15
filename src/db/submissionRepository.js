@@ -75,10 +75,17 @@ const getGradeDistributionByExercise = async (exerciseId, db) => {
             '$sort': {
                 'correct': 1
             }
-        }
+        },
     ];
 
-    return db.collection('studentSubmissions').aggregate(pipeline).toArray();
+    return db.collection('studentSubmissions').aggregate(pipeline, {allowDiskUse: true}).toArray();
 };
 
-module.exports = {findAllSubmissions,countHowManyUsersSubmittedByExercise,  countTotalSubmissionsByExerciseId, countGradedSubmissionsByExerciseId, countUsersActiveInTheLastHour, getGradeDistributionByExercise};
+module.exports = {
+    findAllSubmissions,
+    countHowManyUsersSubmittedByExercise,
+    countTotalSubmissionsByExerciseId,
+    countGradedSubmissionsByExerciseId,
+    countUsersActiveInTheLastHour,
+    getGradeDistributionByExercise
+};
