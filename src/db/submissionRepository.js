@@ -66,8 +66,16 @@ const getGradeDistributionByExercise = async (exerciseId, db) => {
                 'correct': '$result.points.correct',
                 'max': '$result.points.max',
                 'percentage': {
-                    '$divide': [
-                        '$result.points.correct', '$result.points.max'
+                    '$cond': [
+                        {
+                            '$eq': ["$result.points.max", 0]
+                        },
+                        "0",
+                        {
+                            '$divide': [
+                                '$result.points.correct', '$result.points.max'
+                            ]
+                        }
                     ]
                 }
             }
