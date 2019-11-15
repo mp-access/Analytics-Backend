@@ -7,6 +7,7 @@ const dbPassword = process.env.MONGO_DB_PASSWORD;
 const initDb = async (isDev) => {
     return new Promise((resolve, reject) => {
 
+        const databaseName = isDev ? 'dev' : 'access';
         if (!isDev) {
             const parts = dbUrl.split("://");
             dbUrl = parts.join(`://${dbUsername}:${dbPassword}@`);
@@ -18,7 +19,7 @@ const initDb = async (isDev) => {
                 console.log(err);
                 reject(err);
             } else {
-                const db = client.db('dev');
+                const db = client.db(databaseName);
                 resolve(db);
             }
         })
