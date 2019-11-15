@@ -20,6 +20,7 @@ initSubmissionsRoutes = (db, router) => {
             let gradedSubmissions = await submissionsRepository.countGradedSubmissionsByExerciseId(exerciseId, db);
             let totalSubmissions = await submissionsRepository.countTotalSubmissionsByExerciseId(exerciseId, db);
             let usersSubmitted = await submissionsRepository.countHowManyUsersSubmittedByExercise(exerciseId, db);
+            let usersSubmittedGraded = await submissionsRepository.countHowManyUsersSubmittedGradedByExercise(exerciseId, db);
             const distributions = {};
             let maxScore = 0;
             result.map(evaluation => {
@@ -34,7 +35,8 @@ initSubmissionsRoutes = (db, router) => {
                 maxScore,
                 gradedSubmissions,
                 totalSubmissions,
-                usersSubmitted: usersSubmitted.length
+                usersSubmitted: usersSubmitted.length,
+                usersSubmittedGraded: usersSubmittedGraded.length
             });
         } catch (error) {
             console.error(error);

@@ -35,6 +35,11 @@ const countHowManyUsersSubmittedByExercise = async (exerciseId, db) => {
         .distinct('userId', {exerciseId})
 };
 
+const countHowManyUsersSubmittedGradedByExercise = async (exerciseId, db) => {
+    return db.collection('studentSubmissions')
+        .distinct('userId', {exerciseId, isGraded: true})
+};
+
 const getGradeDistributionByExercise = async (exerciseId, db) => {
     const pipeline = [
         {
@@ -92,6 +97,7 @@ const getGradeDistributionByExercise = async (exerciseId, db) => {
 module.exports = {
     findAllSubmissions,
     countHowManyUsersSubmittedByExercise,
+    countHowManyUsersSubmittedGradedByExercise,
     countTotalSubmissionsByExerciseId,
     countGradedSubmissionsByExerciseId,
     countUsersActiveInTheLastHour,
