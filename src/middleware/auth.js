@@ -19,7 +19,7 @@ const auth = async (req, res, next) => {
         if (err) {
             res.status(401).send({error: 'Not authorized to access this resource'})
         } else {
-            if (decoded['realm_access'].roles.includes('access_admin')) {
+            if (decoded['realm_access'].roles.includes('analytics')) {
                 next()
             } else {
                 res.status(401).send({error: 'Not authorized to access this resource'})
