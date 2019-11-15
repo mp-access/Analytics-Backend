@@ -6,7 +6,7 @@ const isDev = process.env.NODE_ENV === 'dev';
 
 const app = express();
 
-initDb().then(db => {
+initDb(isDev).then(db => {
     app.use(express.json());
 
     const initRouter = require('./controller');
