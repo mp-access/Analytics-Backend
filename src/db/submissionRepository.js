@@ -1,6 +1,15 @@
-const findAllSubmissions = async (db) => {
+const countCodeExecs = async (db) => {
     try {
-        return db.collection('studentSubmissions').find().limit(100).toArray();
+        return db.collection('studentSubmissions').find({_class: "code"}).count();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+const countSubmissionsGraded = async (db) => {
+    try {
+        return db.collection('studentSubmissions').find({isGraded: true, _class: "code"}).count();
     } catch (error) {
         console.error(error);
         throw error;
@@ -23,6 +32,10 @@ const countTotalSubmissionsByExerciseId = async (exerciseId, db) => {
         console.error(error);
         throw error;
     }
+};
+
+const countTotalUsers = async (db) => {
+    return db.collection('studentSubmissions').distinct('userId');
 };
 
 const countUsersActiveInTheLastHour = async (db) => {
@@ -95,11 +108,13 @@ const getGradeDistributionByExercise = async (exerciseId, db) => {
 };
 
 module.exports = {
-    findAllSubmissions,
+    countCodeExecs,
+    countSubmissionsGraded,
     countHowManyUsersSubmittedByExercise,
     countHowManyUsersSubmittedGradedByExercise,
     countTotalSubmissionsByExerciseId,
     countGradedSubmissionsByExerciseId,
+    countTotalUsers,
     countUsersActiveInTheLastHour,
-    getGradeDistributionByExercise
+    getGradeDistributionByExercise,
 };

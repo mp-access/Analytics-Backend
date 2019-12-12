@@ -1,6 +1,7 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const initSubmissionsRoutes = require('./Submission');
+const initUsersRoutes = require('./Users');
 
 const initRouter = (db, isDev) => {
     const router = express.Router();
@@ -12,6 +13,7 @@ const initRouter = (db, isDev) => {
     });
 
     initSubmissionsRoutes(db, router);
+    initUsersRoutes(db, router);
 
     router.get('*', function (req, res) {
         res.status(404).send({path: req.path})

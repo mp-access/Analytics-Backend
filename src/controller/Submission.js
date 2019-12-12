@@ -4,8 +4,18 @@ initSubmissionsRoutes = (db, router) => {
 
     router.get('/submissions', async (req, res) => {
         try {
-            const submissions = await submissionsRepository.findAllSubmissions(db);
-            res.status(200).send(submissions);
+            const submissions = await submissionsRepository.countCodeExecs(db);
+            res.status(200).send({submissions});
+        } catch (error) {
+            console.error(error);
+            res.status(400).send(error)
+        }
+    });
+
+    router.get('/submissions/graded', async (req, res) => {
+        try {
+            const submissions = await submissionsRepository.countSubmissionsGraded(db);
+            res.status(200).send({submissions});
         } catch (error) {
             console.error(error);
             res.status(400).send(error)
@@ -41,16 +51,6 @@ initSubmissionsRoutes = (db, router) => {
         } catch (error) {
             console.error(error);
             res.status(500).send();
-        }
-    });
-
-    router.get('/users', async (req, res) => {
-        try {
-            const submissions = await submissionsRepository.countUsersActiveInTheLastHour(db);
-            res.status(200).send({submissionCount: submissions.length});
-        } catch (error) {
-            console.error(error);
-            res.status(400).send(error)
         }
     });
 };
