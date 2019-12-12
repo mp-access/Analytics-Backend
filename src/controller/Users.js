@@ -15,7 +15,7 @@ initUsersRoutes = (db, router) => {
     router.get('/users/active', async (req, res) => {
         try {
             const submissions = await submissionsRepository.countUsersActiveInTheLastHour(db);
-            res.status(200).send({usersActiveLast24Hrs: submissions.length});
+            res.status(200).send({usersActiveLastHour: submissions.length});
         } catch (error) {
             console.error(error);
             res.status(400).send(error)
